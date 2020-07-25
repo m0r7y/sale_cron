@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="crm_lead_reminder" model="mail.template">
+            <field name="name">Rappel sur le pipeline</field>
+            <field name="email_from">admin@example.com</field>
+            <field name="subject">Rappel Pipeline</field>
+            <field name="email_to">${object.user_id.partner_id.email}</field>
+            <field name="model_id" ref="sale_cron.model_crm_lead"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+                        <p>Bonjour, ${object.user_id.partner_id.name}</p>
+                        <p>Ce mail est un rappel concernant votre pipeline :</p>
+                        <p> Nom : ${object.name}</p>
+                        <p> Type : ${object.type}</p>
+                        <p> Revenue probable : ${object.planned_revenue} </p>
+                        <p> Date de rappel : ${object.date_action} </p>
+                        <p> Cordialement </p>
+                        <table style="height: 3px; width: 375px; border-collapse: collapse; font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px" cellpadding="1" border="0" align="center"><tbody><tr style="height: 5px; background-color: #197ee2"><td style="height: 10px; text-align: center">
+              <span style="color: #ffffff">
+                &nbsp; INGENOSYA Business Services
+              </span>
+            </td>
+          </tr><tr style="height: 5px; background-color: #f2f2f2"><td style="width: 371px; height: 10px; text-align: left">
+              <span style="color: #797877">
+                  &nbsp; IIIU 134
+              </span>
+            </td>
+          </tr><tr style="height: 5px; background-color: #f2f2f2"><td style="height: 10px; text-align: left">
+    <span style="color: #797877">
+        &nbsp; 101 Antananarivo
+    </span>
+  </td>
+</tr><tr style="height: 5px; background-color: #f2f2f2"><td style="height: 10px; text-align: left">
+    <span style="color: #797877">
+        &nbsp; Anosizato Est
+    </span>
+  </td>
+</tr><tr style="height: 5px; background-color: #f2f2f2"><td style="height: 10px; text-align: left">
+    <span style="color: #797877">
+        &nbsp; Madagascar,  Madagascar
+    </span>
+  </td>
+</tr><tr style="height: 5px; background-color: #f2f2f2"><td style="height: 10px; text-align: left">
+    <span style="color: #797877">
+        &nbsp; Tél :&nbsp; (+261)202269362
+    </span>
+  </td>
+</tr><tr style="height: 5px; background-color: #f2f2f2"><td style="height: 10px; text-align: left">
+    <span style="color: #797877">
+        &nbsp; Site web :&nbsp;<a>www.ingenosya.com</a>
+    </span>
+  </td>
+</tr></tbody></table>
+                    <div align="center">
+    <% set current_url = object.get_current_url() %>
+    % if current_url :
+      <p>
+      Vous pouvez accéder directement au lien <a style="font-family: 'Lucida Grande', Helvetica, Arial, sans-serif; font-size: 13px;" href="${current_url }">ICI</a>.
+      </p>
+    % endif
+  </div>
+                    ]]>
+            </field>
+        </record>
+    </data>
+</odoo>
